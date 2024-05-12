@@ -1,10 +1,10 @@
 {
   "root": true,
   "project": {
-    "name": "portfolio-demo"
+    "name": "portfolio"
   },
   "api": {
-    "projectId": "ltuexkre",
+    "projectId": "ea7m2ql9",
     "dataset": "production"
   },
   "plugins": [
