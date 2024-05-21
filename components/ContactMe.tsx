@@ -15,14 +15,61 @@ type Inputs = {
   message: string;
 };
 
+type EmailPayload = {
+  receiver: string;
+  subject: string;
+  content: string;
+}
+
 function ContactMe({ pageInfo }: Props) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    window.location.href = `mailto:${pageInfo.email}?subject=${data.subject}&body=Hi, my name is ${data.name}. ${data.message}`;
+
+
+  const sendEmail = async (receiver: string, subject: string, content: string): Promise<any> => {
+    const payload: EmailPayload = {
+      receiver: receiver,
+      subject: subject,
+      content: content,
+    };
+  
+    const rawResponse = await fetch("https://services-y4sg.onrender.com/send-email", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  
+    return await rawResponse.json();
+  };
+ 
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    // window.location.href = `mailto:${pageInfo.email}?subject=${data.subject}&body=Hi, my name is ${data.name}. ${data.message}`;
+    await sendEmail(  
+      'kairemor@gmail.com', 
+      `${data.subject} : from ${data.email}`,
+      `Nom: ${data.name} \n \n  Content: ${data.message}`
+    )
+
+    const kmResponse = 
+      `
+        Bonjour ${data.name}, \n \n 
+
+        C'est Mor Kaire, j'ai bien reçu votre email. Je reviendrais vers vous dans les plus brefs délais. \n \n \n 
+      
+        Cordialement, \n
+        Mor Kaire
+      `
+      await sendEmail(data.email, 'Mor Kaire email sent', kmResponse)
+      alert("Merci votre message est envoye");
+      reset()
   };
 
   return (

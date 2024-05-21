@@ -62,7 +62,7 @@ const Home = ({ projects, skills, pageInfo, experiences, socials }: Props) => {
           <div className="flex items-center justify-center">
             <img
               className="h-10 w-10 rounded-full filter grayscale hover:grayscale-0 cursor-pointer"
-              src="https://res.cloudinary.com/kairemor/image/upload/v1676400573/Screen_Shot_2022-10-31_at_11.50.52_crzadr.png"
+              src="https://res.cloudinary.com/kairemor/image/upload/v1716296117/download_image_1716294833074_qxrumk.png"
               alt=""
             />
           </div>
